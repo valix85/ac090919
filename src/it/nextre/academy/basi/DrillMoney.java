@@ -17,17 +17,66 @@ public class DrillMoney {
         //1 chiedere la difficoltà
         difficolta = impostaDifficolta();
         num_premi = richiediPremi(difficolta);
+
         //2 impostare il tabellone di gioco
         tabellone = new int[difficolta][difficolta];
-        stampaTabellone(tabellone);
+        //stampaTabellone(tabellone);
         generaTabellone(tabellone, num_premi);
-        System.out.println("---------------------------------");
-        stampaTabellone(tabellone);
+        //stampaTabellone(tabellone);
+
         //3 interagire con l'utente
+        //vinto = ammontare vinto durante la partita
+        int vinto = gioca(tabellone, vite);
 
         //4 stampare il risultato
+        if (vinto != 0)
+            System.out.println("Hai vinto!");
+        else
+            System.out.println("Peccato hai perso :(");
+
+        System.out.println("\nVerifica mappa di gioco\n- 0 posizione vuota\n- 1 tesoro\n- 8 posizione controllata dal giocatore");
+        System.out.println("-".repeat(25));
+        stampaTabellone(tabellone);
+        System.out.println("-".repeat(25));
 
     }//end main
+
+    private static int gioca(int[][] tabellone, int vite) {
+        int giocate=0;
+        int riga, colonna;
+        while(vite>0){
+            ++giocate;
+            vite--;
+            System.out.println("TENTATIVO "+ giocate);
+            //todo spsotare/creare metodo leggi riga
+            do {
+                System.out.print("Inserisci la riga: ");
+                riga = MyInput.leggiInteroPositivo();
+                if (riga<0 || riga >=tabellone.length){
+                    System.out.println("Valore troppo grande, numero compreso tra 0 e "+(tabellone.length-1));
+                }
+            }while(riga<0 || riga >=tabellone.length);
+
+
+            //todo spsotare/creare metodo leggi colonna
+            do {
+                System.out.print("Inserisci la colonna: ");
+                colonna = MyInput.leggiInteroPositivo();
+                if (colonna<0 || colonna >=tabellone[riga].length){
+                    System.out.println("Valore troppo grande, numero compreso tra 0 e "+(tabellone[riga].length-1));
+                }
+            }while(colonna<0 || colonna >=tabellone[riga].length);
+
+            if (tabellone[riga][colonna]==1){
+                tabellone[riga][colonna]=8;
+                return 1;
+            }else{
+                tabellone[riga][colonna]=8;
+                System.out.println("Non hai trovato il tesoro, riprova");
+            }
+        }
+        return 0;
+    }
 
 
     /**
@@ -46,7 +95,7 @@ public class DrillMoney {
                 //libera
                 tabellone[x][y]=1;
                 num_premi--;
-                System.out.println("Premio in "+x+", "+y);
+                //System.out.println("Premio in "+x+", "+y);
             }else{
                 System.out.println("nella casella "+x+", "+y+" c'è già un premio");
             }
