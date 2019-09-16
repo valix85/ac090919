@@ -1,5 +1,7 @@
 package it.nextre.academy.geometria.forme;
 
+import it.nextre.academy.geometria.Punto;
+
 public class Rettangolo {
     private double base,altezza;
     public Rettangolo(double base){

@@ -1,6 +1,8 @@
 package it.nextre.academy;
 
+import it.nextre.academy.basi.Conto;
 import it.nextre.academy.geometria.Punto;
+import it.nextre.academy.geometria.forme.Punto3D;
 import it.nextre.academy.geometria.forme.Rettangolo;
 
 public class Application {
@@ -48,6 +50,16 @@ public class Application {
         System.out.println(r1.getPerimetro());
 
         System.out.println( "Ciao".repeat(3) );
+
+
+        Conto c1 = new Conto();
+
+        //Polimorfismo
+
+        Punto d2= new Punto3D(); //ok padre = figlio
+
+        //Punto3D d3 = new Punto(); //mai figlio = padre
+
 
 
     }//end main
