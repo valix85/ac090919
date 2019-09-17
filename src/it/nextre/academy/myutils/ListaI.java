@@ -2,7 +2,7 @@ package it.nextre.academy.myutils;
 
 public class ListaI {
 
-    int mem[];
+    private int mem[];
 
     public ListaI(){
         mem=new int[0];
