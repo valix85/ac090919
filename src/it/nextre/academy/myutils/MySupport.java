@@ -46,11 +46,17 @@ public class MySupport {
      * Stampa una matrice di interi a schermo
      * @param matrice
      */
-    public static void stampaMatriceInter(int[][] matrice) {
+    public static void stampaMatriceInteri(int[][] matrice) {
         for (int riga = 0; riga < matrice.length; riga++) {
+            //System.out.print("[");
             for (int colonna = 0; colonna < matrice[riga].length; colonna++) {
-                System.out.print(matrice[riga][colonna]+" ");
+                //System.out.print(matrice[riga][colonna]+" ");
+                System.out.printf("% 3d ",matrice[riga][colonna]);
+                if (colonna!=matrice[riga].length-1){
+                    //System.out.print("|");
+                }
             }//end for
+            //System.out.print("]");
             System.out.println("");
         }//end for
     }

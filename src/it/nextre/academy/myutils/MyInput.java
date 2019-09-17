@@ -104,5 +104,14 @@ public class MyInput {
     }
 
 
-
+    public static int[][] randomMatrix(int righe, int colonne) {
+         int[][] mattmp = new int[righe][colonne];
+         Random r = new Random();
+         for (int i = 0; i<righe;i++){
+             for (int j = 0; j < colonne; j++) {
+                 mattmp[i][j]=r.nextInt(10);
+             }//end for
+         }
+         return mattmp;
+    }
 }//end class
