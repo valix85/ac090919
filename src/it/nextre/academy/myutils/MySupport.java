@@ -61,4 +61,17 @@ public class MySupport {
         }//end for
     }
 
+
+
+
+    public boolean isPalindroma(String str){
+        int i = 0;
+        for (i=0; i<str.length()/2; i++){
+            if(str.charAt(i)!=str.charAt(str.length()-1-i)){
+                break;
+            }
+        }
+        return i==str.length()/2;
+    }
+
 }//end class
