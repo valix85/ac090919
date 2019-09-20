@@ -22,17 +22,22 @@ public class Lettura {
 
             //br.mark(0);
             //System.out.println(br.lines().count());
-            List<String> elenco = br.lines().collect(Collectors.toList());
-            System.out.println(elenco.size());
+            //List<String> elenco = br.lines().collect(Collectors.toList());
+            //System.out.println(elenco.size());
             //int  righe = 456976000*6*2;
             //br.reset();
-            br.skip(6L);
+            //br.skip(6L);
             System.out.println("ciclo");
+            long nrighe=0L;
+            long limite = 456976000-1010;
             while((riga=br.readLine())!=null){
                 //System.out.println(riga);
+                nrighe++;
+                if (nrighe>limite)
+                    System.out.println(riga);
             }
             br.close();
-            System.out.println(riga);
+            System.out.println("n_righe: "+nrighe);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
