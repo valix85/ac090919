@@ -44,6 +44,18 @@ public class MyInput {
         return Integer.parseInt(tmp);
     }
 
+    public static int leggiIntero2(){
+        System.out.println("Inserisci un numero intero");
+        Scanner s = new Scanner(System.in);
+        String tmp = s.nextLine().trim();
+        try {
+            return Integer.parseInt(tmp);
+        }catch(NumberFormatException ex){
+            System.out.println("VALORE NON VALIDO, riprova:");
+            return leggiIntero2();
+        }
+    }
+
 
     public static String invertiStringa(String input){
         String output="";
