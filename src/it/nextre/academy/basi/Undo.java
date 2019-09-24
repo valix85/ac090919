@@ -1,6 +1,8 @@
 package it.nextre.academy.basi;
 
 
+import it.nextre.academy.basi.eccezioni.IllegalParamsException;
+
 public class Undo<E> {
     E[] mem;
 
@@ -8,6 +10,8 @@ public class Undo<E> {
         this(3);
     }
     public Undo(Integer size){
+        if (size<=0)
+            throw new IllegalParamsException("Grandezza minima di 1 posizione");
         mem = (E[]) new Object[size];
     }
 

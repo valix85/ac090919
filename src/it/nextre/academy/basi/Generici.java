@@ -71,6 +71,37 @@ public class Generici {
 
 
 
+        Undo<String> posizioni = new Undo<>(1);
+        posizioni.debug();
+        posizioni.add("Mario");
+
+        posizioni.debug();
+        posizioni.add("Chiara");
+
+        posizioni.debug();
+        posizioni.add("Luca");
+
+        posizioni.debug();
+        posizioni.add("Federica");
+
+        posizioni.debug();
+        posizioni.add("Gianni");
+
+        posizioni.debug();
+        posizioni.add("Valerio");
+
+        posizioni.debug();
+        posizioni.add("Enrica");
+        posizioni.debug();
+        posizioni.add("Valter");
+
+        posizioni.debug();
+        posizioni.add("Francesca");
+        posizioni.debug();
+
+
+
+
     }//end main
 
 }//end class
