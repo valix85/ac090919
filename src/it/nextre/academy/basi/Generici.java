@@ -1,7 +1,6 @@
 package it.nextre.academy.basi;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Generici {
 
@@ -39,6 +38,38 @@ public class Generici {
                 ((Double)n).isInfinite();
             }
         }
+
+
+
+
+        Box<String> lettera = new Box<>("Ciao");
+
+
+        List<String> emails = new ArrayList<>();
+
+
+        List<String> l1 = new LinkedList<>();
+
+
+        Undo<Integer> estrazioni = new Undo<>();
+        estrazioni.debug();
+        estrazioni.add(5);
+        estrazioni.debug();
+        estrazioni.add(3);
+        estrazioni.debug();
+        estrazioni.add(8);
+        estrazioni.debug();
+        estrazioni.add(7);
+        estrazioni.debug();
+        estrazioni.add(1);
+        estrazioni.debug();
+        Random r = new Random();
+        for (int i = 0; i<15; i++){
+            estrazioni.add(r.nextInt(10));
+            estrazioni.debug();
+        }
+
+
 
     }//end main
 
