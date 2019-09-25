@@ -34,4 +34,8 @@ public class PublisherSubjectObserver {
 
     //todo more custom operations
 
+    public int size(){
+        return iscritti.size();
+    }
+
 }//end class

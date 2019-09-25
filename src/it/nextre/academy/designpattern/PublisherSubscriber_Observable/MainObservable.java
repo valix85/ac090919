@@ -1,6 +1,7 @@
 package it.nextre.academy.designpattern.PublisherSubscriber_Observable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -17,7 +18,20 @@ public class MainObservable {
             esr.addSubscriberObservable(tmp);
         }//end for
 
-        while (esr.estrai()!=null){
+        Integer tmp;
+        while (esr.size()>0 && (tmp=esr.estrai())!=null ){
+            System.out.println("Estratto: "+tmp);
+
+
+            Iterator<Player> it = giocatori.iterator();
+            while(it.hasNext()){
+                Player p=it.next();
+                if (p.inGioco()==true && p.haVinto()){
+                    esr.removeSubscriberObservable(p);
+                    p.setInGioco(false);
+                }
+            }
+            System.out.println("In gara: "+esr.size()+" giocatori");
 
         }
     }//end main
