@@ -31,7 +31,7 @@ public class Giocatore implements Giocante {
         //controllare se la schedina contiene value
         if (schedina.contiene(value)){
             System.out.println("IO: "+this.nome+" HO IL NUMERO: "+value);
-            if (schedina.haFattoUn6()){
+            if (schedina.haFattoUnaRigaPiena()){
                 System.out.println("IO: "+this.nome+" HO FATTO 6!");
                 this.vinto=true;
             }

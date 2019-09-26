@@ -35,7 +35,7 @@ public class Schedina {
         return tmp;
     }
 
-    public boolean haFattoUn6() {
+    public boolean haFattoUnaRigaPiena() {
         for(Riga r : righe){
             if (r.isVincente()){
                 System.out.println("Una Riga Ha Fatto 6");

@@ -57,6 +57,7 @@ public class Sorteggiatore {
     public void estrai(){
         if (estraibili.size()>0){
             estratto=estraibili.get(r.nextInt(estraibili.size()));
+            estraibili.remove(estratto);
             avvisa();
         }
     }

@@ -29,9 +29,11 @@ public class Riga {
 
     public boolean contiene(Integer valore){
         if (numeri.contains(valore)){
+            System.out.println("*** La riga contiene: "+ valore+" ***");
             estratti++;
             return true;
         }
+        System.out.println("La riga non contiene: "+ valore);
         return false;
     }
 
@@ -49,6 +51,6 @@ public class Riga {
     }
 
     public boolean isVincente() {
-        return estratti==6;
+        return estratti==LotteriaMain.N_NUMERI_RIGA;
     }
 }//end class

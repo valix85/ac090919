@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LotteriaMain {
 
-    public static final int N_GIOCATORI = 100;
+    public static final int N_GIOCATORI = 1;
     public static final int N_RIGHE_SCHEDINA = 3;
     public static final int N_NUMERI_RIGA = 6;
 
