@@ -129,6 +129,11 @@ public class DummyData {
         return temp;
     }
 
+
+    public static double getRandomDouble(double base, double delta){
+        return getRandomTemp(base,delta);
+    }
+
     public static int[][] randomMatrix(int righe, int colonne) {
         int[][] mattmp = new int[righe][colonne];
         Random r = new Random();
@@ -138,6 +143,14 @@ public class DummyData {
             }//end for
         }
         return mattmp;
+    }
+
+    public static int getAge(int min, int max){
+        return min+r.nextInt(max-min);
+    }
+
+    public static int getAge(){
+        return getAge(0,110);
     }
 
 }//end class
