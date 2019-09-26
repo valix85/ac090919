@@ -1,4 +1,4 @@
-package it.nextre.academy.Lotteria;
+package it.nextre.academy.lotteria;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package it.nextre.academy.Lotteria;
+package it.nextre.academy.lotteria;
 
 public interface Giocante {
     void controlla(Integer value);
