@@ -17,25 +17,30 @@ public class LotteriaMain {
         //preparare i giocatori
         List<Giocatore> giocatori = new ArrayList<>();
         for (int i = 0; i < N_GIOCATORI; i++) {
-            Giocatore giocatoreTmp = new Giocatore(s1, "Giocatore "+(i+1));
+            Giocatore giocatoreTmp = new Giocatore(s1, "Giocatore " + (i + 1));
             s1.iscrivi(giocatoreTmp);
             giocatori.add(giocatoreTmp);
         }//end for
 
         //estrarre
         List<Giocatore> vincitori = new ArrayList<>();
-        while(vincitori.size()==0){
+        while (vincitori.size() == 0) {
             s1.estrai();
-            for(Giocatore g : giocatori){
-                if (g.haVinto()){
+            for (Giocatore g : giocatori) {
+                if (g.haVinto()) {
                     vincitori.add(g);
                     g.getObservable().cancellaIscrizione(g);
                 }
             }
         }
 
+        //Per completezza disiscrivo tutti i giocatori in ascolto sul sorteggiatore
+        for (Giocatore g : giocatori) {
+            g.getObservable().cancellaIscrizione(g);
+        }
+
         //stampare statistiche
-        for(Giocatore g : vincitori){
+        for (Giocatore g : vincitori) {
             System.out.println(g);
             g.stampaSchedina();
         }
