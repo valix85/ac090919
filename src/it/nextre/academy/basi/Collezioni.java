@@ -22,24 +22,24 @@ public class Collezioni {
 
         List<Umano> popolazione = new LinkedList<>();
 
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
-        popolazione.add(getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
+        popolazione.add(Umano.getRandomUmano());
 
-        System.out.println(popolazione);
-        System.out.println("ordino...");
+        //System.out.println(popolazione);
+        //System.out.println("ordino...");
 
         Comparator<Umano> compEta = new Comparator<Umano>() {
             @Override
@@ -53,7 +53,7 @@ public class Collezioni {
                     return 0;
                 }
                 */
-                 return u1.getEta()-u2.getEta();
+                return u1.getEta() - u2.getEta();
             }
         };
         //popolazione.sort(compEta);
@@ -61,6 +61,7 @@ public class Collezioni {
         //popolazione.sort(Comparator.comparingInt(Umano::getEta));
         //popolazione.sort(Comparator.comparingInt((Umano u)->u.getNome().length()));
 
+        /*
         popolazione.sort((Umano u1, Umano u2)->{
             if(u1.getNome().length()-u2.getNome().length()==0){
                 return u1.getNome().compareTo(u2.getNome());
@@ -69,21 +70,38 @@ public class Collezioni {
             }
         } );
         System.out.println(popolazione);
+*/
 
+        //Umano[] umans = (Umano[])popolazione.toArray();
+        Umano[] umans2 = new Umano[popolazione.size()];
+        popolazione.toArray(umans2);
+        //System.out.println(popolazione);
+        System.out.println(Arrays.toString(umans2));
+        System.out.println("--------------------------");
+        Arrays.sort(umans2); //Usa il comparable
+        System.out.println(Arrays.toString(umans2));
+        System.out.println("--------------------------");
+
+        Arrays.sort(umans2, umans2[0]); //Usa il comparator
+        System.out.println(Arrays.toString(umans2));
+
+        System.out.println("--------------------------");
+        Arrays.sort(umans2, Umano::compareTo); //Usa il comparator
+        System.out.println(Arrays.toString(umans2));
+
+        System.out.println("--------------------------");
+        Arrays.sort(umans2, UmanoComparator.etaComparator); //Usa il comparator
+        System.out.println(Arrays.toString(umans2));
+
+
+        System.out.println("--------------------------");
+        Arrays.sort(umans2, UmanoComparator.pesoComparator); //Usa il comparator
+        System.out.println(Arrays.toString(umans2));
 
 
     }//end main
 
 
-    private static Umano getRandomUmano(){
-        return new Umano(
-                DummyData.getName(),
-                DummyData.getSurname(),
-                DummyData.getAge(),
-                DummyData.getRandomDouble(50,20),
-                DummyData.getRandomDouble(170,30)
-        );
-    }
 
 
 
@@ -91,75 +109,4 @@ public class Collezioni {
 
 
 
-class Umano implements Comparable{
-    private String nome;
-    private String cognome;
-    private int eta;
-    private double peso;
-    private double altezza;
 
-    public Umano(String nome, String cognome, int eta, double peso, double altezza)  {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.eta = eta;
-        this.peso = peso;
-        this.altezza = altezza;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public int getEta() {
-        return eta;
-    }
-
-    public void setEta(int eta) {
-        this.eta = eta;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-
-    public double getAltezza() {
-        return altezza;
-    }
-
-    public void setAltezza(double altezza) {
-        this.altezza = altezza;
-    }
-
-    @Override
-    public String toString() {
-        return "Umano{" +
-                "nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", eta=" + eta +
-                ", peso=" + MySupport.formattaDouble(peso) + "kg" +
-                ", altezza=" + MySupport.formattaDouble(altezza) + "cm" +
-                '}';
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        if(!(o instanceof Umano))return -1;
-        return this.nome.compareTo(((Umano) o).getNome());
-    }
-}
