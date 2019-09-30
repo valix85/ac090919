@@ -1,5 +1,9 @@
 package it.nextre.academy.basi.enumerazioni;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class EnumMain {
     public static void main(String[] args) {
 
@@ -33,8 +37,63 @@ public class EnumMain {
                 Radio.valueOf("STOP").ordinal()
         );
 
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+        System.out.println("-----------------------");
+
+        List<Radio> operations = new ArrayList<>();
+        Random rnd = new Random();
+        Radio[] values = Radio.values();
+        for (int i = 0; i < 10; i++) {
+            operations.add(values[rnd.nextInt(values.length
+            )]);
+        }//end for
+        //operations.forEach(System.out::println);
+
+
+
+
+        operations.stream()
+                //.peek(EnumMain::operate)
+                //.map(Radio::getStato)
+                //.forEach(System.out::println);
+                .forEach(EnumMain::operate);
+
 
     }//end main
+
+    private static void operate(Radio operation) {
+        switch (operation){
+            case ACCESA:
+                System.out.println("RADIO ACCESA");
+                break;
+            case SPENTA:
+                System.out.println("RADIO SPENTA");
+                break;
+            case STOP:
+                System.out.println("TORNO AL MOMENTO 0 DELLA CANZONE ATTUALE E FERMO LA RIPRODUZIONE");
+                break;
+            case PLAY:
+                System.out.println("RIPRENDE LA RIPRODUZIONE");
+                break;
+            case PAUSA:
+                System.out.println("RADIO IN PAUSA, LAMPEGGIO DEL MOMENTO SUL DISPLAY");
+                break;
+            case AVANTI:
+                System.out.println("PROSSIMA CANZONE DELLA PLAYLIST");
+                break;
+            case INDIETRO:
+                System.out.println("CANZONE PRECEDENTE NELLA PLAYLIST");
+                break;
+            case VOL_UP:
+                System.out.println("ALZO IL VOLUME e STAMPO IL VALORE DEL VOLUME segui da 'db' ");
+                break;
+            case VOL_DOWN:
+                System.out.println("ABBASSO IL VOLUME e STAMPO IL VALORE DEL VOLUME segui da 'db' ");
+                break;
+        }
+    }
 }//end class
 
 
