@@ -17,7 +17,9 @@ public class CancelloMain {
          */
 
         Random r = new Random();
+        StatoCremagliera[] valori = StatoCremagliera.values();
         int i=0;
+        /*
         do{
             i++;
             switch (r.nextInt(5)){
@@ -33,7 +35,21 @@ public class CancelloMain {
                     c1.treQuarti(); break;
             }
         }while(i<10);
-
+*/
+        do{
+            switch (valori[r.nextInt(valori.length)]){
+                case APERTA:
+                    c1.apri(); break;
+                case CHIUSA:
+                    c1.chiudi(); break;
+                case UN_QUARTO:
+                    c1.unQuarto(); break;
+                case UN_MEZZO:
+                    c1.unMezzo(); break;
+                case TRE_QUARTI:
+                    c1.treQuarti(); break;
+            }
+        }while(i<10);
 
 
 
