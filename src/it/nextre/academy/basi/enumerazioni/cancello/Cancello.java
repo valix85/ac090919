@@ -27,8 +27,6 @@ public class Cancello {
         muoviA(StatoCremagliera.APERTA);
     }
 
-
-
     public void chiudi(){
         /*
         if (stato==StatoCremagliera.CHIUSA){
@@ -44,7 +42,8 @@ public class Cancello {
         */
          muoviA(StatoCremagliera.CHIUSA);
     }
-    public void metà(){
+
+    public void unMezzo(){
         muoviA(StatoCremagliera.UN_MEZZO);
     }
     public void unQuarto(){
