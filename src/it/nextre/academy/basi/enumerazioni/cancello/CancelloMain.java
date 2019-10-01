@@ -49,6 +49,7 @@ public class CancelloMain {
                 case TRE_QUARTI:
                     c1.treQuarti(); break;
             }
+            i++;
         }while(i<10);
 
 
