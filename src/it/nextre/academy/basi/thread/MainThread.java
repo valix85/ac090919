@@ -2,6 +2,7 @@ package it.nextre.academy.basi.thread;
 
 import it.nextre.academy.myutils.MyInput;
 
+import javax.net.ssl.SSLSocketFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -130,7 +131,7 @@ public class MainThread {
 */
         ExecutorService ex = Executors.newFixedThreadPool(3000);
         //ex.execute(new Task());
-        for (int i = 0; i < 10_000; i++) {
+        for (int i = 0; i < 1; i++) {
             ex.submit(new Task());
             //ex.execute(Task::new);
         }//end for
@@ -175,19 +176,34 @@ class Task implements Runnable {
     @Override
     public void run() {
         //System.out.println("Task Running...");
+        System.setProperty("javax.net.ssl.trustStore", "clienttrust");
+        SSLSocketFactory ssf = (SSLSocketFactory) SSLSocketFactory.getDefault();
         String hostName = "krunker.io";
         int portNumber = 80;
-        try (Socket echoSocket = new Socket(hostName, portNumber);
-             //Scrive sulla Socket
-             PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
-             //legge dalla Socket
-             BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+        try (
+                //Socket echoSocket = new Socket(hostName, portNumber);
+                Socket echoSocket = ssf.createSocket(hostName, portNumber);
+                //Scrive sulla Socket
+                PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
+                //legge dalla Socket
+                BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
              ) {
 
 
             //echoSocket.getKeepAlive();
             //GET /nomeRisorsa HTTP/1.1
-            out.println("GET /?game=FRA:qi7dy HTTP/1.1\n");
+            out.println("GET /?game=FRA:qi7dy HTTP/1.1");
+            out.println("Host: krunker.io");
+            out.println("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0");
+            out.println("Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            out.println("Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3");
+            out.println("Accept-Encoding: gzip, deflate, br");
+            out.println("Connection: keep-alive");
+            out.println("Cookie: __cfduid=db33001adff5a08c035aec79e811c636f1569582500");
+            out.println("Upgrade-Insecure-Requests: 1");
+            out.println("Pragma: no-cache");
+            out.println("Cache-Control: no-cache");
+            out.println("TE: Trailers");
             //out.println("Host: localhost");
 //            String txt = "";
 //            System.out.println("extra header, doppio invio per fermare");
@@ -199,7 +215,7 @@ class Task implements Runnable {
             //Random r = new Random();
             //Thread.sleep(1000 + r.nextInt(3000));
 
-            //out.println("\n"); //<- NON FATTA PER RESTARE IN ATTESA!!!
+            out.println("\n"); //<- NON FATTA PER RESTARE IN ATTESA!!!
 
 
             String output = "";
