@@ -1,5 +1,6 @@
 package it.nextre.academy.myutils;
 
+import java.io.*;
 import java.text.DecimalFormat;
 
 public class MySupport {
@@ -72,6 +73,71 @@ public class MySupport {
             }
         }
         return i==str.length()/2;
+    }
+
+
+    private static int cont=0;
+    public static void sfogliaPath(String s, boolean nascosti) {
+        sfogliaPath(s, nascosti, null);
+    }
+    public static void sfogliaPath(String s, boolean nascosti, File src) {
+        try {
+
+
+
+            File file = new File(s);
+            File[] files = file.listFiles()!=null?file.listFiles():new File[0];
+
+            for (int i = 0; i < files.length; i++) {
+                //skippo file/cartelle nascoste
+                if (!nascosti && files[i].getName().startsWith("."))
+                    continue;
+                if (!nascosti && files[i].isHidden())
+                    continue;
+
+
+                //vedo se devo scrivere su un file l'output
+                boolean toFile=false;
+                PrintWriter pr=null;
+                if (src!=null){
+                    Writer fw = new FileWriter(src,true);
+                    pr = new PrintWriter(fw);
+                    toFile=true;
+                }
+
+                if (files[i].isDirectory()){
+                    File tmp = new File(files[i].toString());
+                    File[] tmps = tmp.listFiles()!=null?tmp.listFiles():new File[0];
+                    String out= " ".repeat(cont)+"> "+files[i].getName() + " ["+tmps.length+"]";
+                    if (toFile) {
+                        pr.write(out+"\n");
+                        pr.flush();
+                        pr.close();
+                    }
+                    else
+                        System.out.println(out);
+
+
+                    cont++;
+                    sfogliaPath(files[i].toString(), nascosti,src);
+                    cont--;
+                }else{
+                    String out = " ".repeat(cont)+"    "+files[i].getName();
+                    if (toFile){
+                        pr.write(out+"\n");
+                        pr.flush();
+                        pr.close();
+                    } else
+                        System.out.println(out);
+                }
+            }
+        } catch (SecurityException e) {
+            System.err.println(e.getMessage());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }//end class
