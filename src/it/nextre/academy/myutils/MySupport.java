@@ -1,6 +1,7 @@
 package it.nextre.academy.myutils;
 
 import java.io.*;
+import java.sql.SQLClientInfoException;
 import java.text.DecimalFormat;
 
 public class MySupport {
@@ -78,13 +79,16 @@ public class MySupport {
 
     private static int cont=0;
     public static void sfogliaPath(String s, boolean nascosti) {
-        sfogliaPath(s, nascosti, null);
+        sfogliaPath(s, nascosti, null,null);
     }
-    public static void sfogliaPath(String s, boolean nascosti, File src) {
+    public static void sfogliaPath(String s, boolean nascosti,String ext) {
+        sfogliaPath(s, nascosti, null, ext);
+    }
+    public static void sfogliaPath(String s, boolean nascosti,File src) {
+        sfogliaPath(s, nascosti, src, null);
+    }
+    public static void sfogliaPath(String s, boolean nascosti, File src, String ext) {
         try {
-
-
-
             File file = new File(s);
             File[] files = file.listFiles()!=null?file.listFiles():new File[0];
 
@@ -94,7 +98,8 @@ public class MySupport {
                     continue;
                 if (!nascosti && files[i].isHidden())
                     continue;
-
+                if (ext!=null && !files[i].isDirectory() && !files[i].getName().toLowerCase().endsWith(ext.toLowerCase()))
+                    continue;
 
                 //vedo se devo scrivere su un file l'output
                 boolean toFile=false;
@@ -103,12 +108,20 @@ public class MySupport {
                     writer = new FileWriter(src,true);
                     toFile=true;
                 }
+                //vedo se devo scrivere il path completo o no
+                boolean fullPath = ext!=null;
 
                 if (files[i].isDirectory()){
                     File tmp = new File(files[i].toString());
                     File[] tmps = tmp.listFiles()!=null?tmp.listFiles():new File[0];
-                    String out= " ".repeat(cont)+"> "+files[i].getName() + " ["+tmps.length+"]";
+                    String out="";
+                    if (fullPath)
+                        out = "";//la directory, in fase di filtraggio, non va scritta su file
+                    else
+                        out = " ".repeat(cont)+"> "+files[i].getName() + " ["+tmps.length+"]";
+
                     if (toFile) {
+                        if (out.trim().length()>0)
                         writer.write(out+"\n");
                         writer.flush();
                         writer.close();
@@ -117,10 +130,15 @@ public class MySupport {
                         System.out.println(out);
 
                     cont++;
-                    sfogliaPath(files[i].toString(), nascosti,src);
+                    sfogliaPath(files[i].toString(), nascosti,src,ext);
                     cont--;
                 }else{
-                    String out = " ".repeat(cont)+"    "+files[i].getName();
+                    String out;
+                    if (fullPath)
+                        out = files[i].toString();
+                    else
+                        out = " ".repeat(cont)+"    "+files[i].getName();
+
                     if (toFile){
                         writer.write(out+"\n");
                         writer.flush();
