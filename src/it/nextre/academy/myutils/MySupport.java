@@ -98,10 +98,9 @@ public class MySupport {
 
                 //vedo se devo scrivere su un file l'output
                 boolean toFile=false;
-                PrintWriter pr=null;
+                Writer writer=null;
                 if (src!=null){
-                    Writer fw = new FileWriter(src,true);
-                    pr = new PrintWriter(fw);
+                    writer = new FileWriter(src,true);
                     toFile=true;
                 }
 
@@ -110,13 +109,12 @@ public class MySupport {
                     File[] tmps = tmp.listFiles()!=null?tmp.listFiles():new File[0];
                     String out= " ".repeat(cont)+"> "+files[i].getName() + " ["+tmps.length+"]";
                     if (toFile) {
-                        pr.write(out+"\n");
-                        pr.flush();
-                        pr.close();
+                        writer.write(out+"\n");
+                        writer.flush();
+                        writer.close();
                     }
                     else
                         System.out.println(out);
-
 
                     cont++;
                     sfogliaPath(files[i].toString(), nascosti,src);
@@ -124,9 +122,9 @@ public class MySupport {
                 }else{
                     String out = " ".repeat(cont)+"    "+files[i].getName();
                     if (toFile){
-                        pr.write(out+"\n");
-                        pr.flush();
-                        pr.close();
+                        writer.write(out+"\n");
+                        writer.flush();
+                        writer.close();
                     } else
                         System.out.println(out);
                 }
