@@ -1,0 +1,5 @@
+package it.nextre.academy.lavanderia;
+
+public enum Categoria {
+    JEANS, PANTALONE, MAGLIETTA, CANOTTA, FELPA, CRAVATTA, GIUBOTTO, CAMICIA, CALZINO, MAGLIONE, INTIMO, PIUMONE, SCARPE, CAPPELLO;
+}
