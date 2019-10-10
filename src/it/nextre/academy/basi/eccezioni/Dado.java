@@ -15,6 +15,13 @@ public class Dado {
         this.max = 6;
     }
 
+    public Dado(boolean tirato) {
+        this.r = new Random();
+        this.min = 1;
+        this.max = 6;
+        if(tirato) faccia = this.min+r.nextInt(max+1-min);
+    }
+
     public Dado(int max) {
         this();
         if (max <= min) { // in realtà è anche max<0
