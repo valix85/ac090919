@@ -125,12 +125,16 @@ public class Persona {
                     ;
         }
     }
+
+
     private class RegistroOrdini{
         List<Ordine> ordini;
+
 
         public RegistroOrdini() {
             this.ordini = new ArrayList<>();
         }
+
 
         public void registraOrdine(Ordine ordine){
             this.ordini.add(ordine);

@@ -76,6 +76,14 @@ public class MySupport {
         return i==str.length()/2;
     }
 
+    private static String capitalize(String string){
+        if (string != null && string.length()>0){
+            String tmp = ""+string.charAt(0);
+            return tmp.toUpperCase()+string.substring(1).toLowerCase();
+        }
+        return string;
+    }
+
 
     private static int cont=0;
     public static void sfogliaPath(String s, boolean nascosti) {
