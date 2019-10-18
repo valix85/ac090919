@@ -31,6 +31,14 @@ public class Zippatore {
     }//end main
 
     private static void creaDummyFile(Path folder, int qta, String prefix, String filename, String ext) {
+        if (!folder.toFile().exists()){
+            try {
+                folder.toFile().mkdirs();
+            }catch (SecurityException ex){
+                System.err.println("Non posso creare la directory di destinazione");
+                return;
+            }
+        }
         if (!folder.toFile().canWrite()) {
             System.out.println("Non ho i permessi per creare i file");
             return;
