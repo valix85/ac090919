@@ -1,5 +1,6 @@
 package it.nextre.academy.basi.gestionefile;
 
+import it.nextre.academy.designpattern.builder.HtmlBuilder;
 import it.nextre.academy.myutils.DummyData;
 
 import java.io.*;
@@ -18,7 +19,7 @@ public class Zippatore {
         Path destination = Paths.get(
                 System.getenv("SystemDrive"),
                 "Users", "Valerio", "Desktop", "dummyFile");
-        creaDummyFile(destination, 15, "___", "test", "txt");
+        creaDummyFile(destination, 15, "___", "test", "html");
 
         //creo lista di file che iniziano con "___"
         File[] files = destination.toFile().listFiles(f->f.getName().startsWith("___"));
@@ -36,11 +37,19 @@ public class Zippatore {
         }
         for (int i = 0; i < qta; i++) {
             String dummyText = "username: "+DummyData.getEmail()+"\n"+"password: "+DummyData.getPassword(8);
+            String dummyHtml = HtmlBuilder.getBuilder("Account Page")
+                    .addH(1,"ACCOUNT")
+                    .addP("<b>username</b>: "+DummyData.getEmail())
+                    .addP("<b>password</b>: "+DummyData.getPassword(8))
+                    .getPage();
+
+
             String tmpFilename = prefix + filename + i + "." + ext;
             Path tmpPath = folder.resolve(Paths.get(tmpFilename));
             File tmpFile = new File(tmpPath.toUri());
             try (FileWriter fwTmp = new FileWriter(tmpFile)) {
-                fwTmp.write(dummyText);
+                //fwTmp.write(dummyText);
+                fwTmp.write(dummyHtml);
             } catch (IOException e) {
                 e.printStackTrace();
             }
