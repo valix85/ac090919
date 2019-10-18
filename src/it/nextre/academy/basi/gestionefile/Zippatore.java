@@ -73,6 +73,11 @@ public class Zippatore {
                     zipper.write(bytes, 0, bytesRead);
                 }
                 fis.close(); //!importantissimo
+                if(file.delete()){
+                    System.out.println("Cancellato il file:\n\t"+file.getAbsolutePath());
+                }else{
+                    System.out.println("NON POSSO CANCELLARE il file:\n\t"+file.getAbsolutePath());
+                };
             }
             return outputFile;
         } catch (FileNotFoundException e) {
