@@ -2,13 +2,14 @@ package it.nextre.academy.basi.gestionefile;
 
 import it.nextre.academy.myutils.DummyData;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 public class Zippatore {
 
@@ -22,6 +23,8 @@ public class Zippatore {
         //creo lista di file che iniziano con "___"
         File[] files = destination.toFile().listFiles(f->f.getName().startsWith("___"));
         Arrays.asList(files).stream().forEach(System.out::println);
+
+        zippa(Arrays.asList(files), destination, "archive");
 
 
     }//end main
@@ -45,6 +48,39 @@ public class Zippatore {
         }
 
 
+    }
+
+
+
+
+    private static File zippa(List<File> files, Path destination, String filename){
+        if (files.size()<=0){return null;}
+
+        Path outputPath = destination.resolve(Paths.get(filename+".zip"));
+        File outputFile = outputPath.toFile();
+        System.out.println(outputFile.getAbsolutePath());
+
+
+
+        try(ZipOutputStream zipper = new ZipOutputStream(new FileOutputStream(outputFile.getAbsolutePath()))) {
+            for(File file : files){
+                ZipEntry entry = new ZipEntry(file.getName()); //nome dentro allo zip
+                zipper.putNextEntry(entry);
+                FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+                byte[] bytes = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = fis.read(bytes)) != -1) {
+                    zipper.write(bytes, 0, bytesRead);
+                }
+                fis.close(); //!importantissimo
+            }
+            return outputFile;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }//end class
