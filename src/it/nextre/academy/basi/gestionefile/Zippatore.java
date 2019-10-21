@@ -79,6 +79,7 @@ public class Zippatore {
 
 
 
+
         try(ZipOutputStream zipper = new ZipOutputStream(new FileOutputStream(outputFile.getAbsolutePath()))) {
             for(File file : files){
                 ZipEntry entry = new ZipEntry(file.getName()); //nome dentro allo zip
